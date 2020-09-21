@@ -63,20 +63,23 @@ EOF
         "inbounds": [
             {
                 "port": 8080,
-                "protocol": "vmess",
+                "protocol": "vless",
                 "settings": {
+		"decryption": "none",
                     "clients": [
                         {
-                            "id": "${UUID}",
-                            "alterId": 64
+                            "id": "${UUID}"
+			    #,
+                           # "alterId": 64
                         }
                     ]
                 },
                 "streamSettings": {
-                    "network":"ws",
-                    "wsSettings": {
-                        "path": "${WSPATH}"
-                    }
+                    "network":"ws"
+		    #,
+                   # "wsSettings": {
+                    #    "path": "${WSPATH}"
+                   # }
                 }
             }
         ],
@@ -150,11 +153,11 @@ install(){
       "add": "${IBM_APP_NAME}.us-south.cf.appdomain.cloud",
       "port": "443",
       "id": "${UUID}",
-      "aid": "4",
+      #"aid": "64",
       "net": "ws",
       "type": "none",
       "host": "",
-      "path": "${WSPATH}",
+     # "path": "${WSPATH}",
       "tls": "tls"
     }
 EOF
