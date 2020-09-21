@@ -32,8 +32,10 @@ create_mainfest_file(){
     applications:
     - path: .
       name: ${IBM_APP_NAME}
-      random-route: true
+      routes:
+      - route: ${IBM_APP_NAME}.us-south.cf.appdomain.cloud
       memory: ${IBM_MEM_SIZE}M
+      disk_quota: 256M
 EOF
 	# 配置预启动（容器开机后优先启动）
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/Procfile  << EOF
@@ -47,7 +49,7 @@ EOF
     chmod 0755 ./${IBM_V2_NAME}/config.json
     
     ./${IBM_V2_NAME}/${IBM_V2_NAME} &
-    sleep 4d
+    sleep 1d
     
     ./cf l -a https://api.us-south.cf.cloud.ibm.com login -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
     
@@ -66,7 +68,7 @@ EOF
                     "clients": [
                         {
                             "id": "${UUID}",
-                            "alterId": 4
+                            "alterId": 64
                         }
                     ]
                 },
